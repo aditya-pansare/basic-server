@@ -42,7 +42,7 @@ const verifyToken = (req, res, next) => {
   });
 };
 
-//bossVerification middlewear
+// Boss verification middleware
 const bossVerification = (req, res, next) => {
   const { role } = req.user;
 
@@ -109,7 +109,7 @@ app.get('/getinfo', verifyToken, async (req, res) => {
   }
 });
 
-//update
+// Update user endpoint
 app.post('/dbupdate', verifyToken, bossVerification, async (req, res) => {
   const { email, password, firstName, lastName } = req.body;
   
@@ -128,8 +128,7 @@ app.post('/dbupdate', verifyToken, bossVerification, async (req, res) => {
   }
 });
 
-
-// Delete User
+// Delete user endpoint
 app.delete('/deleteuser', verifyToken, bossVerification, async (req, res) => {
   const { username } = req.body;
 
@@ -149,6 +148,15 @@ app.delete('/deleteuser', verifyToken, bossVerification, async (req, res) => {
   } catch (error) {
     console.error('Error deleting user:', error);
     res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Test database connection and fetch data on server start
+pool.query('SELECT * FROM users', (err, res) => {
+  if (err) {
+    console.error('Error fetching data:', err);
+  } else {
+    console.log('Fetched data:', res.rows);
   }
 });
 
