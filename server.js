@@ -8,7 +8,7 @@ const port = 3000;
 const pool = new pg.Pool({
   user: 'root',
   host: 'database-deeparmor-login.c1wqcu6gcgxy.ap-south-1.rds.amazonaws.com',
-  database: 'postgres',
+  database: 'database-deeparmor-login',
   password: 'password',
   port: 5432,
 });
