@@ -11,6 +11,9 @@ const pool = new pg.Pool({
   database: 'postgres', // Adjust this if your actual database name is different
   password: 'password', // Replace with your actual root password
   port: 5432,
+  ssl: {
+    rejectUnauthorized: false // Adjust as per your SSL requirements
+  }
 });
 
 const secret_key = "887260ef7f0564d05badf0a15b3bc5c2";
