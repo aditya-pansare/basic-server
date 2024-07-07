@@ -6,10 +6,10 @@ const app = express();
 const port = 3000;
 
 const pool = new pg.Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'master',
-  password: 'root',
+  user: 'root',
+  host: 'database-deeparmor-login.c1wqcu6gcgxy.ap-south-1.rds.amazonaws.com',
+  database: 'postgres',
+  password: 'password',
   port: 5432,
 });
 
@@ -62,7 +62,7 @@ app.post('/login', async (req, res) => {
   }
 
   try {
-    const query = 'SELECT * FROM login WHERE "Email" = $1 AND "Password" = $2';
+    const query = 'SELECT * FROM users WHERE "Email" = $1 AND "Password" = $2';
     const result = await pool.query(query, [email, password]);
 
     if (result.rows.length === 0) {
@@ -94,7 +94,7 @@ app.get('/getinfo', verifyToken, async (req, res) => {
   }
 
   try {
-    const query = 'SELECT "FirstName", "LastName" FROM login WHERE "Email" = $1';
+    const query = 'SELECT "FirstName", "LastName" FROM users WHERE "Email" = $1';
     const result = await pool.query(query, [username]);
 
     if (result.rows.length === 0) {
@@ -118,7 +118,7 @@ app.post('/dbupdate', verifyToken, bossVerification, async (req, res) => {
   }
 
   try {
-    const query = 'INSERT INTO login ("Email", "Password", "FirstName", "LastName") VALUES ($1, $2, $3, $4)';
+    const query = 'INSERT INTO users ("Email", "Password", "FirstName", "LastName") VALUES ($1, $2, $3, $4)';
     await pool.query(query, [email, password, firstName, lastName]);
 
     res.status(201).json({ message: 'User added successfully' });
@@ -138,7 +138,7 @@ app.delete('/deleteuser', verifyToken, bossVerification, async (req, res) => {
   }
 
   try {
-    const query = 'DELETE FROM login WHERE "Email" = $1';
+    const query = 'DELETE FROM users WHERE "Email" = $1';
     const result = await pool.query(query, [username]);
 
     if (result.rowCount === 0) {
