@@ -154,14 +154,6 @@ app.delete('/deleteuser', verifyToken, bossVerification, async (req, res) => {
   }
 });
 
-// Test database connection and fetch data on server start
-pool.query('SELECT * FROM users', (err, res) => {
-  if (err) {
-    console.error('Error fetching data:', err);
-  } else {
-    console.log('Fetched data:', res.rows);
-  }
-});
 
 // Start the server
 app.listen(port, () => {
