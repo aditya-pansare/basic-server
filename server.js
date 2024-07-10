@@ -154,6 +154,14 @@ app.delete('/deleteuser', verifyToken, bossVerification, async (req, res) => {
   }
 });
 
+pool.query('SELECT * FROM users', (err, res) => {
+  if (err) {
+    console.error('Error fetching data:', err);
+  } else {
+    console.log('Fetched data:', res.rows);
+  }
+});
+
 // Default route
 app.get('/', (req, res) => {
   res.send('Welcome to my server!');
