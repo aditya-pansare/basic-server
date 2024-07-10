@@ -154,6 +154,10 @@ app.delete('/deleteuser', verifyToken, bossVerification, async (req, res) => {
   }
 });
 
+// Default route
+app.get('/', (req, res) => {
+  res.send('Welcome to my server!');
+});
 
 // Start the server
 app.listen(port, () => {
