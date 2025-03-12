@@ -1,13 +1,12 @@
 ---
-name: Bug report
-about: Create a report to help us improve
+name: backend_bug_report
+about: Template to file bug in the backend
 title: ''
 labels: ''
-assignees: aditya-pansare
+assignees: ''
 
 ---
 
-# Backend Bug Report Template
 ### All headings with asterisks[*] are required
 
 ## *Issue Summary
